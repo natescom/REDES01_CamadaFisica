@@ -1,91 +1,74 @@
 package com.nathan.util;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 
-/****************************************************************
- * Autor: Nathan Ferraz da Silva
- * Matricula: 201911925
- * Inicio: 30/07/2021
- * Ultima alteracao: 30/07/2021
- * Nome: RedeGUI
- * Funcao: Gerencia as alteracoes que ha na interface para representar
- * a rede
- * ************************************************************** */
 public class RedeGUI {
-  private final ImageView arquivo;
-  private final TextField textField;
-  private final Text text_result;
-  private final Button btn_enviar;
-  private final Label lbl_log;
+  private final TextField txtInput;
+  private final Label lblDisp02;
+  private final HBox hboxLed;
+  private final Button btnEnviar;
+  private final Slider sld_speed;
+  private final TextArea txt_emissor;
+  private final TextArea txt_receptor;
 
-  public RedeGUI(ImageView arquivo, TextField textField, Text text, Button btn_enviar, Label lbl_log) {
-    this.arquivo = arquivo;
-    this.textField = textField;
-    this.text_result = text;
-    this.btn_enviar = btn_enviar;
-    this.lbl_log = lbl_log;
+  public RedeGUI(TextField txtInput, Label lblDisp02, HBox hboxLed, Button btnEnviar, Slider sld_speed, TextArea txt_emissor, TextArea txt_receptor) {
+    this.txtInput = txtInput;
+    this.lblDisp02 = lblDisp02;
+    this.hboxLed = hboxLed;
+    this.btnEnviar = btnEnviar;
+    this.sld_speed = sld_speed;
+    this.txt_emissor = txt_emissor;
+    this.txt_receptor = txt_receptor;
   }
 
-  /**
-   * Pega o texto no editText
-   * @return
-   */
-  public String getText_result(){
-    return textField.getText();
+  public Slider getSld_speed() {
+    return sld_speed;
   }
 
-  /**
-   * Publica o progresso no envio da mensagem
-   * Altera a coordenada da imagem
-   * @param i
-   */
-  public void publishProgress(float i){
-    double xINICIAL = 95;
-    double xFINAL = 560;
-    double xATUAL = (xFINAL - xINICIAL) * i + xINICIAL;
-    arquivo.setLayoutX(xATUAL);
-    if((i>0.15 && i<0.40) && arquivo.getImage() != Gallery.ARQUIVOCOD){
-      arquivo.setImage(Gallery.ARQUIVOCOD);
-      Platform.runLater(() -> lbl_log.setText("Camada Fisica Transmissora"));
-    }
-    if((i>0.65 && i < 0.85) && arquivo.getImage() != Gallery.ARQUIVOCOD){
-      arquivo.setImage(Gallery.ARQUIVOCOD);
-      Platform.runLater(() -> lbl_log.setText("Camada Fisica Receptora"));
-    }
-    if(i>0.40 && i<0.65 && arquivo.getImage() != Gallery.SINAL){
-      arquivo.setImage(Gallery.SINAL);
-      Platform.runLater(() -> lbl_log.setText("Meio de comunicacao"));
-    }
-    if(i<0.15 && arquivo.getImage() != Gallery.ARQUIVO){
-      arquivo.setImage(Gallery.ARQUIVO);
-      Platform.runLater(() -> lbl_log.setText("Aplicacao Transmissora"));
-    }
-    if(i>0.85 && arquivo.getImage() != Gallery.ARQUIVO){
-      arquivo.setImage(Gallery.ARQUIVO);
-      Platform.runLater(() -> lbl_log.setText("Aplicacao Receptora"));
-    }
-    try {
-      Thread.sleep(100);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+  public String getInput(){
+    return txtInput.getText();
   }
 
-  /**
-   * Publica a mensagem recebida
-   * @param s
-   */
-  public void publishText(String s){
+  public void publishSignal(int[] bits){
+    DisplayLed.show(bits, hboxLed, sld_speed);
+  }
+
+  public void publishTxtEmissor(String s){
     Platform.runLater(() -> {
-      text_result.setText(s);
-      lbl_log.setText("Mensagem recebida");
+      txt_emissor.setText(txt_emissor.getText() + s);
+      txt_emissor.positionCaret(txt_emissor.getText().length());
     });
-    btn_enviar.setDisable(false);
   }
 
+  public void publishTxtReceptor(String s){
+    Platform.runLater(() -> {
+      txt_receptor.setText(txt_receptor.getText() + s);
+      txt_receptor.positionCaret(txt_receptor.getText().length());
+    });
+  }
+
+  public void publishResult(String s){
+    Platform.runLater(() -> {
+      lblDisp02.setText(s);
+      lblDisp02.setTextFill(Paint.valueOf("#000000"));
+      btnEnviar.setDisable(false);
+    });
+  }
+
+  public void clearTxt(){
+    Platform.runLater(() ->{
+      txt_emissor.setText("");
+      txt_receptor.setText("");
+    } );
+  }
+
+  public void publishTxtEmissor(){
+    Platform.runLater(() -> {
+      txt_emissor.setText(txt_emissor.getText().substring(0,txt_emissor.getText().length()-2));
+      txt_emissor.positionCaret(txt_emissor.getText().length());
+    });
+  }
 }

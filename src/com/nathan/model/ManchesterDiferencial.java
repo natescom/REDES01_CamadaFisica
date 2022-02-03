@@ -1,16 +1,16 @@
-package com.nathan.util;
+package com.nathan.model;
 
 /****************************************************************
  * Autor: Nathan Ferraz da Silva
  * Matricula: 201911925
  * Inicio: 29/07/2021
- * Ultima alteracao: 29/07/2021
+ * Ultima alteracao: 13/01/2022
  * Nome: Manchester
  * Funcao: codificar e decodificar bits
  * ************************************************************** */
 public class ManchesterDiferencial extends Protocolo {
   @Override
-  int[] codificar(int[] bits) {
+  public int[] codificar(int[] bits) {
     int[] cod = new int[bits.length * 2];
     for (int i = 0, j = 0; i < bits.length; i++) {
       // Caso inicial, baixo-alto
@@ -37,7 +37,7 @@ public class ManchesterDiferencial extends Protocolo {
   }
 
   @Override
-  int[] decodificar(int[] bits) {
+  public int[] decodificar(int[] bits) {
     int[] decod = new int[bits.length / 2];
     for (int i = 0, j = 0; i < bits.length; i += 2) {
       if (i == 0) {

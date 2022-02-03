@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  * ***************************************************************/
 public abstract class Gallery {
 
-  private static final String path = "/com/nathan/res/img";
+  private static final String path = "/com/nathan/view/img";
 
   public static final Image ARQUIVO = new Image(Gallery.class.getResourceAsStream(path+"/file_lines-0.png"));
   public static final Image ARQUIVOCOD = new Image(Gallery.class.getResourceAsStream(path+"/file_sorted_lock-1.png"));

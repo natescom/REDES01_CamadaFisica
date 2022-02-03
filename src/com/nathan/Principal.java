@@ -20,9 +20,10 @@ public class Principal extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//    Parent root = FXMLLoader.load(getClass().getResource("view/sample.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("view/screen/telaprincipal.fxml"));
     primaryStage.setTitle("Redes I - Trab 01");
-    primaryStage.getIcons().add(new Image(Principal.class.getResourceAsStream("/com/nathan/res/img/network_cool_two_pcs-5.png")));
+    primaryStage.getIcons().add(new Image(Principal.class.getResourceAsStream("/com/nathan/view/img/network_cool_two_pcs-5.png")));
     primaryStage.setScene(new Scene(root));
     primaryStage.setOnCloseRequest(t -> {
       Platform.exit();
@@ -30,7 +31,6 @@ public class Principal extends Application {
     }); // Ao fechar a janela todos os processos sao fechados tambem
     primaryStage.show();
 
-    Controller controller = new Controller();
   }
 
   public static void main(String[] args) {

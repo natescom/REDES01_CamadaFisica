@@ -1,18 +1,19 @@
-package com.nathan.util;
+package com.nathan.model;
 
 import com.nathan.model.Protocolo;
+import com.nathan.util.RedeGUI;
 
 /****************************************************************
  * Autor: Nathan Ferraz da Silva
  * Matricula: 201911925
  * Inicio: 29/07/2021
- * Ultima alteracao: 29/07/2021
+ * Ultima alteracao: 20/02/2022
  * Nome: Rede
  * Funcao: Executa os passos de transmissao de mensagem na rede
  * ************************************************************** */
 public class Rede {
   private final RedeGUI gui;
-  private Protocolo protocolo;
+  private final Protocolo protocolo;
 
   public Rede(RedeGUI gui, Protocolo protocolo) {
     this.gui = gui;
@@ -24,6 +25,7 @@ public class Rede {
    */
   public void aplicacaoTransmissora(){
     camadaDeAplicacaoTransmissora(gui.getInput());
+    gui.publishIndicador(0, true);
   }
 
   /**
@@ -84,6 +86,7 @@ public class Rede {
    * Aplica alguma codificacao na mensagem e envia
    */
   private void camadaFisicaTransmissora(int[] quadro, Protocolo protocolo){
+    gui.publishIndicador(6,true);
     int[] fluxoBrutoDeBits = protocolo.codificar(quadro);
 
     int time = 100; // 100
@@ -121,6 +124,7 @@ public class Rede {
    * @param fluxoBrutoDeBits
    */
   private void meioDeComunicacao(int[] fluxoBrutoDeBits){
+    gui.removeIdicador();
     System.out.println("\nMEIO DE COMUNICACAO");
     int[] pontoA = fluxoBrutoDeBits ;
     int[] pontoB = new int[pontoA.length];
@@ -134,6 +138,9 @@ public class Rede {
     }
 
     new Thread(() -> {
+      /**
+       * Essa rotina envia os dados de um ponto ao outro
+       */
       for (int i = 0; i < pontoA.length; i++) {
         pontoB[i] = pontoA[i];
         gui.publishTxtReceptor(pontoB[i] + " ");
@@ -150,6 +157,7 @@ public class Rede {
    * @param protocolo
    */
   private void camadaFisicaReceptora(int[] fluxoBrutoDeBits, Protocolo protocolo){
+    gui.publishIndicador(6, false);
     int[] quadro = protocolo.decodificar(fluxoBrutoDeBits);
 
 
@@ -160,18 +168,24 @@ public class Rede {
 
       System.out.print("\t Fluxo de bits: ");
       gui.publishTxtReceptor("\nFluxo de bits:\n");
+
+
       for (int i = 0; i < fluxoBrutoDeBits.length; i++) {
         System.out.print(fluxoBrutoDeBits[i]);
         gui.publishTxtReceptor(fluxoBrutoDeBits[i]+"");
+
         pausarThread(time);
       }
+
       System.out.printf("\n\t %-15s", "Quadro:");
       gui.publishTxtReceptor(String.format("%s", "\nQuadro: \n"));
+
       for (int i = 0; i < quadro.length; i++) {
         System.out.print(quadro[i]);
         gui.publishTxtReceptor(quadro[i]+"");
         pausarThread(time);
       }
+
       camadaDeAplicacaoReceptora(quadro);
     }).start();
   }
@@ -180,6 +194,7 @@ public class Rede {
    * Pega os bits recebidos e transforma em mensagem
    */
   private void camadaDeAplicacaoReceptora(int[] quadro){
+    gui.publishIndicador(0, false);
     System.out.println("\nCAMADA DE APLICACAO RECEPTORA");
     gui.publishTxtReceptor("\n\nCAMADA DE APLICACAO RECEPTORA\n");
     int time = 300;
@@ -215,8 +230,16 @@ public class Rede {
     gui.publishResult(s);
     System.out.println("\t Mensagem recebida:" + s);
     System.out.println("-----------------------------");
+    gui.removeIdicador();
   }
 
+  /**
+   * Bloco pra pausar a Thread que chamar essa funcao
+   * Serve apenas para deixar o codigo mais legivel
+   * @param max Tempo maximo de pausa da Thread, o
+   *            valor real eh definido pelo produto
+   *            do valor do slide pelo tempo maximo
+   */
   public void pausarThread(int max){
     try {
       Thread.sleep((long) (max*gui.getSld_speed().getValue()));
@@ -224,5 +247,6 @@ public class Rede {
       e.printStackTrace();
     }
   }
+
 
 }

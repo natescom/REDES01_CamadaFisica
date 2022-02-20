@@ -10,10 +10,7 @@ import javafx.scene.image.Image;
  * Funcao: Lista e instanica todas as imagens para serem utilizadas
  * ***************************************************************/
 public abstract class Gallery {
-
   private static final String path = "/com/nathan/view/img";
 
-  public static final Image ARQUIVO = new Image(Gallery.class.getResourceAsStream(path+"/file_lines-0.png"));
-  public static final Image ARQUIVOCOD = new Image(Gallery.class.getResourceAsStream(path+"/file_sorted_lock-1.png"));
-  public static final Image SINAL = new Image(Gallery.class.getResourceAsStream(path+"/sinal.gif"));
+  public static final Image INDICADOR = new Image(Gallery.class.getResourceAsStream(path+"/angulo-circulo-direita.png"));
 }

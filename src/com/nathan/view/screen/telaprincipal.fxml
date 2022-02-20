@@ -53,7 +53,7 @@
             </Label>
             <VBox prefHeight="306.0" prefWidth="194.0" spacing="5.0" styleClass="card" stylesheets="@../styles/paginaPrincipal.css">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="184.0" spacing="45.0">
+                  <HBox fx:id="hboxEmAp" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="184.0">
                      <children>
                         <Label prefHeight="44.0" prefWidth="82.0" text="Aplicacao">
                            <font>
@@ -66,9 +66,9 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="10.0">
+                  <HBox fx:id="hboxEmApr">
                      <children>
-                        <Label text="Apresentacao">
+                        <Label disable="true" text="Apresentacao">
                            <font>
                               <Font name="Cambria Bold" size="18.0" />
                            </font>
@@ -79,7 +79,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="70.0">
+                  <HBox fx:id="hboxEmSe">
                      <children>
                         <Label disable="true" text="Sessao">
                            <font>
@@ -92,7 +92,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="34.0">
+                  <HBox fx:id="hboxEmTr">
                      <children>
                         <Label disable="true" text="Transporte">
                            <font>
@@ -105,7 +105,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="83.0">
+                  <HBox fx:id="hboxEmRe">
                      <children>
                         <Label disable="true" text="Rede">
                            <font>
@@ -118,7 +118,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox>
+                  <HBox fx:id="hboxEmEn">
                      <children>
                         <Label disable="true" text="Enlace de Dados">
                            <font>
@@ -131,7 +131,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="139.0">
+                  <HBox fx:id="hboxEmFi" alignment="CENTER" prefHeight="52.0" prefWidth="139.0">
                      <children>
                         <MenuButton fx:id="menu_cod" mnemonicParsing="false" popupSide="RIGHT" prefHeight="52.0" prefWidth="187.0">
                           <items>
@@ -209,7 +209,7 @@
             </Label>
             <VBox prefHeight="300.0" prefWidth="194.0" spacing="5.0" styleClass="card" stylesheets="@../styles/paginaPrincipal.css">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="184.0" spacing="45.0">
+                  <HBox fx:id="hboxReAp" alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="184.0">
                      <children>
                         <Label prefHeight="44.0" prefWidth="82.0" text="Aplicacao">
                            <font>
@@ -222,9 +222,9 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="10.0">
+                  <HBox fx:id="hboxReApr">
                      <children>
-                        <Label text="Apresentacao">
+                        <Label disable="true" text="Apresentacao">
                            <font>
                               <Font name="Cambria Bold" size="18.0" />
                            </font>
@@ -235,7 +235,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="70.0">
+                  <HBox fx:id="hboxReSe">
                      <children>
                         <Label disable="true" text="Sessao">
                            <font>
@@ -248,7 +248,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="34.0">
+                  <HBox fx:id="hboxReTr">
                      <children>
                         <Label disable="true" text="Transporte">
                            <font>
@@ -261,7 +261,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox spacing="83.0">
+                  <HBox fx:id="hboxReRe">
                      <children>
                         <Label disable="true" text="Rede">
                            <font>
@@ -274,7 +274,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox>
+                  <HBox fx:id="hboxReEn">
                      <children>
                         <Label disable="true" text="Enlace de Dados">
                            <font>
@@ -287,7 +287,7 @@
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="174.0">
+                  <HBox fx:id="hboxReFi" alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="174.0">
                      <children>
                         <Label text="Fisica">
                            <font>
